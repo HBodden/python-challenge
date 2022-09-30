@@ -6,6 +6,7 @@ import csv
 poll_csv = os.path.join("Resources","election_data.csv")
 
 votecount = 0
+cand_names = []
 #Read in the CSV file 
 with open(poll_csv) as csvfile:
 
@@ -18,9 +19,17 @@ with open(poll_csv) as csvfile:
         #print(row)
         if int(row[0]) >= 0:        
             votecount += 1
-    
-    
-print(votecount)
+#Count the number of votes    
+#print(votecount)
+
+with open(poll_csv) as csvfile:
+    csv_reader = csv.reader(csvfile, delimiter=",")
+    header2 = next(csv_reader)
+    for name in csv_reader:
+        if name[2] not in cand_names:
+            cand_names.append(name[2])
+        
+print(cand_names)
 
     
 # Election Results
@@ -38,10 +47,10 @@ print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {votecount} ")
 print("-------------------------")
-print("Candidates are: ")
-
-
-
+print("The Candidates are: ")
+print(f"{cand_names[0]}")
+print(f"{cand_names[1]}")
+print(f"{cand_names[2]}")
 print("-------------------------")
 print("Winner: ")
 print("-------------------------")
