@@ -12,7 +12,6 @@ cand2_count =0
 cand3_count = 0
 cand_names = []
 
-
 #Read in the CSV file 
 with open(poll_csv) as csvfile:
 
@@ -44,11 +43,13 @@ with open(poll_csv) as csvfile:
             cand2_count += 1
         elif name[2] == cand_names[2]:
             cand3_count += 1
+# print(cand1_count)
+# print(cand2_count)
+# print(cand3_count)
 
-print(cand1_count)
-print(cand2_count)
-print(cand3_count)
-    
+candidates = {}
+candidates = dict()
+
 # Election Results
 # -------------------------
 # Total Votes: 369711
@@ -69,5 +70,5 @@ print(str(cand_names[0])+ ": " + str("{:.3%}".format(cand1_count/votecount))+ " 
 print(str(cand_names[1])+ ": " + str("{:.3%}".format(cand2_count/votecount))+ " " + "("+str(cand2_count)+")")
 print(str(cand_names[2])+ ": " + str("{:.3%}".format(cand3_count/votecount))+ " " + "("+str(cand3_count)+")")
 print("-------------------------")
-print("Winner: ")
+print("Winner: " )
 print("-------------------------")
