@@ -47,8 +47,28 @@ with open(poll_csv) as csvfile:
 # print(cand2_count)
 # print(cand3_count)
 
-candidates = {}
-candidates = dict()
+votes = [cand1_count, cand2_count, cand3_count]
+sort_votes = sorted(votes)
+print(votes)
+print(sorted(votes))
+print(sort_votes[len(sort_votes)-1])
+t= False 
+while t == False:
+    if sort_votes[len(sort_votes)-1] == votes[0]:
+        winner = cand_names[0]
+        t = True
+        #print(winner)
+    elif sort_votes[len(sort_votes)-1] == votes[1]:
+        winner = cand_names[1]
+        t = True
+       # print(winner)
+    elif sort_votes[len(sort_votes)-1] == votes[2]:
+        winner = cand_names[2]
+        t = True 
+        
+#print(winner)
+#print(cand_names[len(votes)-1])
+
 
 # Election Results
 # -------------------------
@@ -70,5 +90,5 @@ print(str(cand_names[0])+ ": " + str("{:.3%}".format(cand1_count/votecount))+ " 
 print(str(cand_names[1])+ ": " + str("{:.3%}".format(cand2_count/votecount))+ " " + "("+str(cand2_count)+")")
 print(str(cand_names[2])+ ": " + str("{:.3%}".format(cand3_count/votecount))+ " " + "("+str(cand3_count)+")")
 print("-------------------------")
-print("Winner: " )
+print("Winner: " + str(winner) )
 print("-------------------------")
