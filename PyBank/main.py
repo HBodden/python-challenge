@@ -7,6 +7,7 @@ rowcount = 0
 totalprofloss = 0
 totalchange = 0
 tally = []
+tally2 = []
 
 bank_csv = os.path.join("Resources","budget_data.csv")
 
@@ -24,22 +25,7 @@ with open(bank_csv) as csvfile:
     for row in csvreader:
         totalprofloss = totalprofloss + int(row[1])
     #print(totalprofloss)
-
-with open(bank_csv) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    csv_header = next(csvreader)     
-    for row in csvreader:
-        tally.append(row[1])
-        print(tally[1])
-        
-        #totalchange = tally[] - tally[]   
-        #print(tally)
-        #print(type(tally))
-
-        #totalprofloss += row[1]
-    #print(totalprofloss)
-    
-
+ 
 # Financial Analysis
 # ----------------------------
 # Total Months: 86
@@ -52,7 +38,7 @@ print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
-#print(f"Average Change: ${totalchange/85}")
+print("Average Change: $")
 print("Greatest Increase in Profits: ")
 print("Greatest Decrease in Profits: ")
 
