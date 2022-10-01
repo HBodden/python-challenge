@@ -1,19 +1,25 @@
 #Import packages for the project 
 import os
 import csv
+from tokenize import Double
 
 #Set a varribale for the csv file
 poll_csv = os.path.join("Resources","election_data.csv")
-
+#initiate the variables to capture the required information
 votecount = 0
+cand1_count =0
+cand2_count =0
+cand3_count = 0
 cand_names = []
+
+
 #Read in the CSV file 
 with open(poll_csv) as csvfile:
 
     csv_reader = csv.reader(csvfile, delimiter=",")
     
     header = next(csv_reader)
-    print(header)
+#print(header)
 
     for row in csv_reader:
         #print(row)
@@ -21,16 +27,27 @@ with open(poll_csv) as csvfile:
             votecount += 1
 #Count the number of votes    
 #print(votecount)
-
 with open(poll_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
     header2 = next(csv_reader)
     for name in csv_reader:
         if name[2] not in cand_names:
             cand_names.append(name[2])
-        
-print(cand_names)
+#print(cand_names)
+with open(poll_csv) as csvfile:
+    csv_reader = csv.reader(csvfile, delimiter=",")
+    header2 = next(csv_reader)
+    for name in csv_reader:
+        if name[2] == cand_names[0]:
+            cand1_count += 1 
+        elif name[2] == cand_names[1]:
+            cand2_count += 1
+        elif name[2] == cand_names[2]:
+            cand3_count += 1
 
+print(cand1_count)
+print(cand2_count)
+print(cand3_count)
     
 # Election Results
 # -------------------------
@@ -48,9 +65,9 @@ print("-------------------------")
 print(f"Total Votes: {votecount} ")
 print("-------------------------")
 print("The Candidates are: ")
-print(f"{cand_names[0]}")
-print(f"{cand_names[1]}")
-print(f"{cand_names[2]}")
+print(str(cand_names[0])+ ": " + str("{:.3%}".format(cand1_count/votecount))+ " " + "(" +str(cand1_count) + ")")
+print(str(cand_names[1])+ ": " + str("{:.3%}".format(cand2_count/votecount))+ " " + "("+str(cand2_count)+")")
+print(str(cand_names[2])+ ": " + str("{:.3%}".format(cand3_count/votecount))+ " " + "("+str(cand3_count)+")")
 print("-------------------------")
 print("Winner: ")
 print("-------------------------")
