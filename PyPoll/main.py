@@ -49,9 +49,9 @@ with open(poll_csv) as csvfile:
 
 votes = [cand1_count, cand2_count, cand3_count]
 sort_votes = sorted(votes)
-print(votes)
-print(sorted(votes))
-print(sort_votes[len(sort_votes)-1])
+#print(votes)
+#print(sorted(votes))
+#print(sort_votes[len(sort_votes)-1])
 t= False 
 while t == False:
     if sort_votes[len(sort_votes)-1] == votes[0]:
@@ -65,10 +65,8 @@ while t == False:
     elif sort_votes[len(sort_votes)-1] == votes[2]:
         winner = cand_names[2]
         t = True 
-        
 #print(winner)
 #print(cand_names[len(votes)-1])
-
 
 # Election Results
 # -------------------------
