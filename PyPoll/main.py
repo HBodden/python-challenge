@@ -1,7 +1,7 @@
 #Import packages for the project 
 import os
 import csv
-from tokenize import Double
+#from tokenize import Double
 
 #Set a varribale for the csv file
 poll_csv = os.path.join("Resources","election_data.csv")
