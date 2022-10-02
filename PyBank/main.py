@@ -39,10 +39,10 @@ with open(bank_csv) as csvfile:
         tally.append(row[1])
         tally2.append(row[1])  
 tally2.pop(0)
-#Max/Min function found on stackoverflow.com
+#Max/Min function found at https://stackoverflow.com/questions/63820220/why-python-max-does-not-return-maximum-value
 t_max = max(map(int,tally))
 t_min = min(map(int,tally))
-
+#Zip logic found at https://stackoverflow.com/questions/57615420/how-to-perform-element-wise-arithmetic-operations-e-g-add-subtract-multiply
 for x, y in zip(tally, tally2):
     newtally.append(int(y) - int(x))
     combinedlist.append(newtally)
@@ -64,15 +64,18 @@ while t == False:
         if t_max == int(row[1]):
             bincrease.append(row)
             t = True
+#format info found @ https://www.pythonpool.com/remove-brackets-from-list-python/#:~:text=Using%20string%20slicing%20method%20to%20remove%20brackets%20from,so%20we%20are%20giving%20as%20%5B1%3A-1%5D.%20Output%20
 
-#print(bincrease)
+format = {39:None,91:None,93:None}
+s= str(bincrease).translate(format)
+#print(len(bincrease))
 
 while f == False:
     for row in bankdata:
         if t_min == int(row[1]):
             bdecrease.append(row)
             f = True 
-
+t = str(bdecrease).translate(format)
 #print(bdecrease)
 
 # Financial Analysis
@@ -88,5 +91,5 @@ print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
 print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
-print("Greatest Increase in Profits:" +  str(bincrease))
-print(f"Greatest Decrease in Profits: {bdecrease[0]}")
+print("Greatest Increase in Profits: " + s)
+print("Greatest Decrease in Profits: " + t)
