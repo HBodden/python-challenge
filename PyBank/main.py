@@ -8,6 +8,8 @@ totalprofloss = 0
 totalchange = 0
 tally = []
 tally2 = []
+newtally = []
+final = []
 
 bank_csv = os.path.join("Resources","budget_data.csv")
 
@@ -25,7 +27,32 @@ with open(bank_csv) as csvfile:
     for row in csvreader:
         totalprofloss = totalprofloss + int(row[1])
     #print(totalprofloss)
- 
+with open(bank_csv) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=",")
+    csv_header = next(csvreader)     
+    for row in csvreader:    
+        tally.append(row[1])
+        tally2.append(row[1])  
+tally2.pop(0)
+tally2.append(0)
+#print(type(tally))
+#print(tally2)
+# def element_wise(a, b, f):
+#      return [element_wise(i, j, f) 
+#      #if type(i) == list and type(j) == list else 
+#      f(i, j) for i, j in zip(a, b)]
+
+# totalchange = element_wise(int(tally2), int(tally), lambda x, y: x + y) 
+
+for x, y in zip(tally, tally2):
+    newtally.append(int(y) - int(x))
+    final.append(newtally)
+print(len(final[0]))
+    #return pl
+for each in final:
+    totalchange += each[0]
+print(totalchange)
+
 # Financial Analysis
 # ----------------------------
 # Total Months: 86
