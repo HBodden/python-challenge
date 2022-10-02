@@ -2,25 +2,30 @@
 import os
 import csv 
 #set variable for csv path
-
+t = False
+f = False
 rowcount = 0
 totalprofloss = 0
 totalchange = 0
+bankdata = []
+bankdata1 = []
 tally = []
 tally2 = []
 newtally = []
 combinedlist = []
 tallytotal = []
+bincrease = []
+bdecrease = []
+
 bank_csv = os.path.join("Resources","budget_data.csv")
 
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
-
     csv_header = next(csvreader)
     #print(csv_header)
     for row in csvfile:
         rowcount += 1
-    #print(rowcount)
+    #print(rowcount)    
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)     
@@ -34,18 +39,41 @@ with open(bank_csv) as csvfile:
         tally.append(row[1])
         tally2.append(row[1])  
 tally2.pop(0)
+#Max/Min function found on stackoverflow.com
+t_max = max(map(int,tally))
+t_min = min(map(int,tally))
 
 for x, y in zip(tally, tally2):
     newtally.append(int(y) - int(x))
     combinedlist.append(newtally)
-#print((final[0]))
 
 tallytotal = combinedlist[0]
 
 for each in tallytotal:
-    totalchange += each 
-   
+    totalchange += each    
 #print(totalchange)
+
+with open(bank_csv) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=",")
+    csv_header = next(csvreader)
+    for row in csvreader:
+        bankdata.append(row)
+
+while t == False:
+    for row in bankdata:
+        if t_max == int(row[1]):
+            bincrease.append(row)
+            t = True
+
+#print(bincrease)
+
+while f == False:
+    for row in bankdata:
+        if t_min == int(row[1]):
+            bdecrease.append(row)
+            f = True 
+
+#print(bdecrease)
 
 # Financial Analysis
 # ----------------------------
@@ -60,15 +88,5 @@ print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
 print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
-print("Greatest Increase in Profits: ")
-print("Greatest Decrease in Profits: ")
-
-    
-# list1 = [1,2,3,4]
-# list2 = ['a','b','c','d']
-
-# my_zip = zip(list1,list2)
-# print(my_zip)
-# #loop over the object
-# for each in my_zip:
-#     print(max(each[0]))
+print("Greatest Increase in Profits:" +  str(bincrease))
+print(f"Greatest Decrease in Profits: {bdecrease[0]}")
