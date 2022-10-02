@@ -9,8 +9,8 @@ totalchange = 0
 tally = []
 tally2 = []
 newtally = []
-final = []
-
+combinedlist = []
+tallytotal = []
 bank_csv = os.path.join("Resources","budget_data.csv")
 
 with open(bank_csv) as csvfile:
@@ -34,24 +34,18 @@ with open(bank_csv) as csvfile:
         tally.append(row[1])
         tally2.append(row[1])  
 tally2.pop(0)
-tally2.append(0)
-#print(type(tally))
-#print(tally2)
-# def element_wise(a, b, f):
-#      return [element_wise(i, j, f) 
-#      #if type(i) == list and type(j) == list else 
-#      f(i, j) for i, j in zip(a, b)]
-
-# totalchange = element_wise(int(tally2), int(tally), lambda x, y: x + y) 
 
 for x, y in zip(tally, tally2):
     newtally.append(int(y) - int(x))
-    final.append(newtally)
-print(len(final[0]))
-    #return pl
-for each in final:
-    totalchange += each[0]
-print(totalchange)
+    combinedlist.append(newtally)
+#print((final[0]))
+
+tallytotal = combinedlist[0]
+
+for each in tallytotal:
+    totalchange += each 
+   
+#print(totalchange)
 
 # Financial Analysis
 # ----------------------------
@@ -65,7 +59,7 @@ print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
-print("Average Change: $")
+print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
 print("Greatest Increase in Profits: ")
 print("Greatest Decrease in Profits: ")
 
