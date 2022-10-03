@@ -52,7 +52,9 @@ tallytotal = combinedlist[0]
 for each in tallytotal:
     totalchange += each    
 #print(totalchange)
-
+mtallytotal = max(tallytotal)
+mintallytotal = min(tallytotal)
+print(mtallytotal)
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
@@ -91,5 +93,5 @@ print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
 print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
-print("Greatest Increase in Profits: " + s)
-print("Greatest Decrease in Profits: " + t)
+print(f"Greatest Increase in Profits: $({round(mtallytotal,2)})")
+print(f"Greatest Decrease in Profits: $({round(mintallytotal,2)})")
