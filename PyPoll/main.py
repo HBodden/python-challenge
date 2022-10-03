@@ -5,6 +5,7 @@ import csv
 
 #Set a varribale for the csv file
 poll_csv = os.path.join("Resources","election_data.csv")
+out_file = os.path.join("Analysis","poll_analysis.txt")
 #initiate the variables to capture the required information
 votecount = 0
 cand1_count =0
@@ -70,7 +71,9 @@ while t == False:
         t = True 
 #print(winner)
 #print(cand_names[len(votes)-1])
-
+cand1_info = str("{:.3%}".format(cand1_count/votecount))
+cand2_info = str("{:.3%}".format(cand2_count/votecount))
+cand3_info = str("{:.3%}".format(cand3_count/votecount))
 # Election Results
 # -------------------------
 # Total Votes: 369711
@@ -82,13 +85,20 @@ while t == False:
 # Winner: Diana DeGette
 # -------------------------
 #Challenge output
-print("Election Results")
-print("-------------------------")
-print(f"Total Votes: {votecount} ")
-print("-------------------------")
-print(str(cand_names[0])+ ": " + str("{:.3%}".format(cand1_count/votecount))+ " " + "(" +str(cand1_count) + ")")
-print(str(cand_names[1])+ ": " + str("{:.3%}".format(cand2_count/votecount))+ " " + "("+str(cand2_count)+")")
-print(str(cand_names[2])+ ": " + str("{:.3%}".format(cand3_count/votecount))+ " " + "("+str(cand3_count)+")")
-print("-------------------------")
-print("Winner: " + str(winner) )
-print("-------------------------")
+output = (
+    f"Election Results\n"
+    f"------------------------\n"
+    f"Total Votes: {votecount}\n"
+    f"------------------------\n"
+    f"{str(cand_names[0])}: {cand1_info} ({str(cand1_count)})\n"
+    f"{str(cand_names[1])}: {cand2_info} ({str(cand2_count)}\n"
+    f"{str(cand_names[2])}: {cand3_info} ({str(cand3_count)})\n"
+    f"------------------------\n"
+    f"Winner: {str(winner)}\n"
+    f"------------------------\n"
+)
+
+print(output)
+
+with open(out_file,"w") as text_file:
+    text_file.write(output)
