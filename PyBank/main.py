@@ -60,24 +60,24 @@ mtallytotal = max(tallytotal)
 mintallytotal = min(tallytotal)
 #print(len(tallytotal))
 
-#identify the line number the biggest increase occurs and get the associated date
+#identify the line number where the biggest increase occurs 
 for row in tallytotal:
     if int(mtallytotal) != int(row):
         countrow += 1 
     elif int(mtallytotal) == int(row):
         s = countrow
-
 #print(s)        
+#using the line number (countrow) pop the date associated with the biggest increase and assign it to the variable
 increasedate = bankdata.pop(s)
 #print(increasedate)
-#Identify the line of the biggest decrease and get the associated date
+#Identify the line number of the biggest decrease 
 for row in tallytotal:
     if int(mintallytotal) != int(row):
         countrow2 += 1 
     elif int(mintallytotal) == int(row):
         t = countrow2
-
 #print(t)   
+#Using the line number associated with the biggest decrease pop the correspnding date
 decreasedate = bankdata.pop(t)  
 #print(decreasedate)   
 
@@ -90,7 +90,7 @@ decreasedate = bankdata.pop(t)
 # Greatest Decrease in Profits: Feb-14 ($-1825558)
 
 print("Financial Analysis")
-#print(f"-----{countrow}-----------------------")
+print("----------------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
 print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
