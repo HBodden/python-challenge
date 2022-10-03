@@ -5,6 +5,8 @@ import csv
 t = False
 f = False
 rowcount = 0
+countrow = 1
+countrow2 = 1
 totalprofloss = 0
 totalchange = 0
 bankdata = []
@@ -16,9 +18,9 @@ combinedlist = []
 tallytotal = []
 bincrease = []
 bdecrease = []
-
+#Initiate varriable to read csv file
 bank_csv = os.path.join("Resources","budget_data.csv")
-
+#Count the number of rows in the file
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)
@@ -26,23 +28,25 @@ with open(bank_csv) as csvfile:
     for row in csvfile:
         rowcount += 1
     #print(rowcount)    
+#calculate the total profit/loss (add up all values in the list)
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)     
     for row in csvreader:
         totalprofloss = totalprofloss + int(row[1])
     #print(totalprofloss)
+#create lists to set up the calculation to find the biggest increase and biggest decrease
 with open(bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvreader)     
     for row in csvreader:    
         tally.append(row[1])
         tally2.append(row[1])  
+        bankdata.append(row[0])
 tally2.pop(0)
-#Max/Min function found at https://stackoverflow.com/questions/63820220/why-python-max-does-not-return-maximum-value
-t_max = max(map(int,tally))
-t_min = min(map(int,tally))
-#Zip logic found at https://stackoverflow.com/questions/57615420/how-to-perform-element-wise-arithmetic-operations-e-g-add-subtract-multiply
+#print(bankdata)
+
+#for loop logic from at https://stackoverflow.com/questions/57615420/how-to-perform-element-wise-arithmetic-operations-e-g-add-subtract-multiply
 for x, y in zip(tally, tally2):
     newtally.append(int(y) - int(x))
     combinedlist.append(newtally)
@@ -54,31 +58,28 @@ for each in tallytotal:
 #print(totalchange)
 mtallytotal = max(tallytotal)
 mintallytotal = min(tallytotal)
-print(mtallytotal)
-with open(bank_csv) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    csv_header = next(csvreader)
-    for row in csvreader:
-        bankdata.append(row)
+#print(len(tallytotal))
 
-while t == False:
-    for row in bankdata:
-        if t_max == int(row[1]):
-            bincrease.append(row)
-            t = True
-#format info found @ https://www.pythonpool.com/remove-brackets-from-list-python/#:~:text=Using%20string%20slicing%20method%20to%20remove%20brackets%20from,so%20we%20are%20giving%20as%20%5B1%3A-1%5D.%20Output%20
+#identify the line number the biggest increase occurs and get the associated date
+for row in tallytotal:
+    if int(mtallytotal) != int(row):
+        countrow += 1 
+    elif int(mtallytotal) == int(row):
+        s = countrow
 
-format = {39:None,91:None,93:None}
-s= str(bincrease).translate(format)
-#print(len(bincrease))
+#print(s)        
+increasedate = bankdata.pop(s)
+#print(increasedate)
+#Identify the line of the biggest decrease and get the associated date
+for row in tallytotal:
+    if int(mintallytotal) != int(row):
+        countrow2 += 1 
+    elif int(mintallytotal) == int(row):
+        t = countrow2
 
-while f == False:
-    for row in bankdata:
-        if t_min == int(row[1]):
-            bdecrease.append(row)
-            f = True 
-t = str(bdecrease).translate(format)
-#print(bdecrease)
+#print(t)   
+decreasedate = bankdata.pop(t)  
+#print(decreasedate)   
 
 # Financial Analysis
 # ----------------------------
@@ -89,9 +90,9 @@ t = str(bdecrease).translate(format)
 # Greatest Decrease in Profits: Feb-14 ($-1825558)
 
 print("Financial Analysis")
-print("----------------------------")
+#print(f"-----{countrow}-----------------------")
 print(f"Total Months: {rowcount}")
 print(f"Total: ${totalprofloss}")
 print(f"Average Change: ${round(totalchange/(len(tallytotal)),2)}")
-print(f"Greatest Increase in Profits: $({round(mtallytotal,2)})")
-print(f"Greatest Decrease in Profits: $({round(mintallytotal,2)})")
+print(f"Greatest Increase in Profits: {increasedate} $({round(mtallytotal,2)})")
+print(f"Greatest Decrease in Profits: {decreasedate} $({round(mintallytotal,2)})")
